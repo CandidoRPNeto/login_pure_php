@@ -18,5 +18,11 @@ Após concluir o exercício, faça o upload do seu código no GitHub e envie o l
 *O exercício deve ser realizado em PHP puro.
 
 ## execute
+Start docker
+```
 docker-compose up -d mysql
-php -S localhost:8000    
+```
+Start php
+```
+php -S localhost:8000
+```
