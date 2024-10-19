@@ -6,6 +6,10 @@ $senha = isset($_POST["password_user"]) ? $_POST["password_user"] : null;
 
 function login() {
     global $email, $senha, $mysqli;
+    if (!$email || !$senha) {
+        echo "Email e senha são obrigatórios.";
+        return;
+    }
     $stmt = $mysqli->prepare("SELECT password_user FROM test.users WHERE email_user = ?");
     $stmt->bind_param("s", $email);
     $stmt->execute();
@@ -13,13 +17,27 @@ function login() {
     if ($stmt->num_rows > 0) {
         $stmt->bind_result($senha_db);
         $stmt->fetch();
-        if (password_verify($senha, $senha_db)) {
-            header("Location: ../users.phtml");
+        if ($senha == $senha_db) {
+            set_cookie();
+            header("Location: ../users.php");
             exit;
+        } else {
+            echo "Senha incorreta.";
         }
+    } else {
+        echo "Usuário não encontrado.";
     }
-    echo "Dados Incorretos";
+    
     $stmt->close();
+}
+
+function set_cookie(){
+    if (!isset($_COOKIE['login'])) {
+        $cookie_value = "valor_do_cookie";
+        $cookie_name = "login";
+        $cookie_expiration = time() + (86400 * 30);
+        setcookie($cookie_name, $cookie_value, $cookie_expiration, "/");
+    }
 }
 
 login();
