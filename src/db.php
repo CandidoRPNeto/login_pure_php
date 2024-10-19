@@ -1,5 +1,5 @@
 <?php
-$hostname = "mysql";
+$hostname = "127.0.0.1";
 $bancodados = "app";
 $usuario = "admin";
 $senha = "1234";

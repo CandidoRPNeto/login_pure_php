@@ -16,3 +16,7 @@ Caso as credenciais sejam validadas com sucesso, o usuário deve ser redireciona
 Após concluir o exercício, faça o upload do seu código no GitHub e envie o link do repositório para o email: heisentecnologia@gmail.com.
 
 *O exercício deve ser realizado em PHP puro.
+
+## execute
+docker-compose up -d mysql
+php -S localhost:8000    
